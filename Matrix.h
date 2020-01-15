@@ -7,7 +7,7 @@
 
 #include "Searchable.h"
 
-class Matrix: Searchable<pair<int, int>> {
+class Matrix: public Searchable<pair<int, int>> {
     pair<int, int> initialState;
     pair<int, int> goalState;
     int rows;

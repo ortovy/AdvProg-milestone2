@@ -12,7 +12,7 @@ void MyTestClientHandler::handleClient(int clientSocket) {
     while (strcmp(buffer, "end")) {
         cout << buffer << endl;
         char* msg;
-        if(cache.existsInCache(buffer)) {
+        if(cache.existsSolution(buffer)) {
             string m= cache.getSolution(buffer);
             msg = strcpy(new char[m.length() + 1], m.c_str());
         } else {

@@ -11,7 +11,7 @@ using namespace std;
 template <typename S>
 class CacheManager {
 public:
-    virtual bool existsInCache(string problem) = 0;
+    virtual bool existsSolution(string problem) = 0;
     virtual S getSolution(string problem) = 0;
     virtual void saveSolution(string problem, S solution) = 0;
 };

@@ -6,18 +6,20 @@
 #define ADVPROG_MILESTONE2_MATRIX_H
 
 #include "Searchable.h"
-
-class Matrix: public Searchable<pair<int, int>> {
-    pair<int, int> initialState;
-    pair<int, int> goalState;
+#include "State.h"
+#include "Cell.h"
+#include <vector>
+class Matrix: public Searchable<Cell> {
     int rows;
     int columns;
+    vector<vector<double>> matrix;
+    State<Cell>* initialState;
+    State<Cell>* goalState;
 public:
-    Matrix(int x, int y, int z, int w, int rows, int columns);
-    pair<int, int> getInitialState();
-    bool isGoalState(pair<int, int> state);
-    list<pair<int, int>> getAllPossibleStates(pair<int, int> state);
+    Matrix(int rows, int columns, vector<vector<double>> matrix, State<Cell> *initial, State<Cell> *goal);
+    State<Cell>* getInitialState();
+    bool isGoalState(State<Cell> *state);
+    vector<State<Cell>*> getAllPossibleStates(State<Cell> *state);
 };
-
 
 #endif //ADVPROG_MILESTONE2_MATRIX_H

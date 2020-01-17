@@ -3,29 +3,40 @@
 //
 
 #include "Matrix.h"
-Matrix::Matrix(int x, int y, int z, int w, int rows, int columns) {
-    initialState.first = x;
-    initialState.second = y;
-    goalState.first = z;
-    goalState.second = w;
+Matrix::Matrix(int rows, int columns, vector<vector<double>> matrix, State<Cell> *initial, State<Cell> *goal) {
     this->rows = rows;
     this->columns = columns;
+    this->matrix = matrix;
+    this->initialState = initial;
+    this->goalState = goal;
 }
-pair<int, int> Matrix:: getInitialState() {
-    return initialState;
+
+State<Cell>* Matrix:: getInitialState() {
+    return this->initialState;
 }
-bool Matrix:: isGoalState(pair<int, int> state) {
-    return (state == goalState);
+bool Matrix:: isGoalState(State<Cell> *state) {
+    return (goalState->operator==(state));
 }
-list<pair<int, int>> Matrix:: getAllPossibleStates(pair<int, int> state) {
-    list<pair<int, int>> adjList;
-    adjList.push_back(make_pair(state.first-1, state.second));
-    adjList.push_back(make_pair(state.first+1, state.second));
-    adjList.push_back(make_pair(state.first, state.second-1));
-    adjList.push_back(make_pair(state.first, state.second+1));
-    for (list<pair<int,int>>::iterator it = adjList.begin(); it != adjList.end(); it++) {
-        if (it->first < 0 || it->first > rows || it->second < 0 || it->second > columns) {
-            adjList.remove(make_pair(it->first, it->second));
+vector<State<Cell>*> Matrix:: getAllPossibleStates(State<Cell> *state) {
+    vector<State<Cell>*> adjList;
+    //gets i,j - location on the matrix
+    int row = state->getStateObj().getRow();
+    int column = state->getStateObj().getColumn();
+    //creates all thw "neighbors" cells
+    State<Cell> *s1 = new State<Cell> (Cell(row-1, column));
+    State<Cell> *s2 = new State<Cell> (Cell(row+1, column));
+    State<Cell> *s3 = new State<Cell> (Cell(row, column-1));
+    State<Cell> *s4 = new State<Cell> (Cell(row, column+1));
+    //push them to the list
+    adjList.push_back(s1);
+    adjList.push_back(s2);
+    adjList.push_back(s3);
+    adjList.push_back(s4);
+
+    for (int i = 0; i < 4; i++) {
+        State<Cell> *checker = adjList.front();
+        if (!(checker->getStateObj().getRow() < 0 || checker->getStateObj().getRow() > rows || checker->getStateObj().getColumn() < 0 || checker->getStateObj().getColumn() > columns)) {
+            adjList.push_back(checker);
         }
     }
     return adjList;

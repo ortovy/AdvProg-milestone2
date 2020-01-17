@@ -8,7 +8,8 @@
 #include "Searchable.h"
 template <typename T,typename S>
 class Searcher {
-    virtual S search(Searchable<T> s) = 0;
+public:
+    virtual S search(Searchable<T> *s);
 };
 
 

@@ -20,6 +20,7 @@ public:
     State<Cell>* getInitialState();
     bool isGoalState(State<Cell> *state);
     vector<State<Cell>*> getAllPossibleStates(State<Cell> *state);
+    double getStateValue(State<Cell> *state);
 };
 
 #endif //ADVPROG_MILESTONE2_MATRIX_H

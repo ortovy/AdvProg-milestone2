@@ -18,7 +18,7 @@ public:
         this->state = s;
         this->previous = nullptr;
         this->cost = -1;
-        this->firstCost = -1;
+        //this->firstCost = -1;
     }
     bool operator==(State<T> *s) {
         return (this->state == s->getStateObj());
@@ -31,6 +31,9 @@ public:
     }
     void setPrevious(State<T>* pre) {
         previous = pre;
+    }
+    State<T>* getPrevious() {
+        return this->previous;
     }
 };
 

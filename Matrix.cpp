@@ -34,10 +34,14 @@ vector<State<Cell>*> Matrix:: getAllPossibleStates(State<Cell> *state) {
     adjList.push_back(s4);
 
     for (int i = 0; i < 4; i++) {
-        State<Cell> *checker = adjList.front();
-        if (!(checker->getStateObj().getRow() < 0 || checker->getStateObj().getRow() > rows || checker->getStateObj().getColumn() < 0 || checker->getStateObj().getColumn() > columns)) {
-            adjList.push_back(checker);
+        State<Cell> *checker = adjList.back();
+        adjList.pop_back();
+        if (checker->getStateObj().getRow() >= 0 && checker->getStateObj().getRow() <= rows-1 && checker->getStateObj().getColumn() >= 0 && checker->getStateObj().getColumn() <= columns-1) {
+            adjList.insert(adjList.begin(), checker);
         }
     }
     return adjList;
+}
+double Matrix::getStateValue(State<Cell> *state) {
+    return matrix[state->getStateObj().getRow()][state->getStateObj().getColumn()];
 }

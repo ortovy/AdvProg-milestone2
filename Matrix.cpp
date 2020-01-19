@@ -45,3 +45,7 @@ vector<State<Cell>*> Matrix:: getAllPossibleStates(State<Cell> *state) {
 double Matrix::getStateValue(State<Cell> *state) {
     return matrix[state->getStateObj().getRow()][state->getStateObj().getColumn()];
 }
+
+void Matrix::setStateValue(State<Cell> *state, double val) {
+    matrix[state->getStateObj().getRow()][state->getStateObj().getColumn()] = val;
+}

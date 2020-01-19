@@ -21,6 +21,7 @@ public:
     bool isGoalState(State<Cell> *state);
     vector<State<Cell>*> getAllPossibleStates(State<Cell> *state);
     double getStateValue(State<Cell> *state);
+    void setStateValue(State<Cell> *state, double val);
 };
 
 #endif //ADVPROG_MILESTONE2_MATRIX_H

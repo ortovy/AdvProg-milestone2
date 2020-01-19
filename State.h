@@ -17,17 +17,15 @@ public:
         State(T s): state(s) {
         this->state = s;
         this->previous = nullptr;
-        this->cost = -1;
-        //this->firstCost = -1;
     }
     bool operator==(State<T> *s) {
         return (this->state == s->getStateObj());
     }
+    bool operator<(State<T> *s) {
+        return (this->state < s->getStateObj());
+    }
     T getStateObj() {
         return this->state;
-    }
-     double getCost() {
-        return cost;
     }
     void setPrevious(State<T>* pre) {
         previous = pre;

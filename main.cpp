@@ -6,6 +6,7 @@
 #include "Searchable.h"
 #include "BFS.h"
 #import "DFS.h"
+#import "BestFS.h"
 int main() {
     std::cout << "Hello, World!" << std::endl;
    // MySerialServer s = MySerialServer();
@@ -22,7 +23,7 @@ int main() {
     State<Cell>* goal = new State<Cell> (Cell(2,2));
     Searchable<Cell> *M = new Matrix(3, 3, m, init, goal);
     //Searcher<Cell, vector<State<Cell>*>> *bfs = new BFS<Cell>;
-    Searcher<Cell, vector<State<Cell>*>> *n = new BFS<Cell>;
+    Searcher<Cell, vector<State<Cell>*>> *n = new BestFS<Cell>;
     vector<State<Cell>*> v = n->search(M);
    // Searcher<Cell, vector<State<Cell>*>> *iSearcher = new BestFirstSearch<Cell, double>();
     //vector<State<Cell>*> bb = bfs->search(M);

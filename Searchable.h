@@ -15,6 +15,7 @@ public:
     virtual bool isGoalState(State<T> *state) = 0;
     virtual vector<State<T>*> getAllPossibleStates(State<T> *state) = 0;
     virtual double getStateValue(State<T> *state) = 0;
+    virtual void setStateValue(State<T> *state, double val) = 0;
 };
 
 #endif //ADVPROG_MILESTONE2_SEARCHABLE_H

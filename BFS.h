@@ -14,7 +14,6 @@
 template <typename T>
 class BFS: public Searcher<T, vector<State<T>*>> {
     vector<State<T>*> visited;
-    int numOfDevNodes = 0;
 public:
     vector<State<T>*> search(Searchable<T> *s) {
         // Create a queue for BFS
@@ -31,7 +30,7 @@ public:
             // Dequeue a vertex from queue and print it
             State<T>* p  = queue.front();
             queue.pop_front();
-            numOfDevNodes++;
+            this->numOfDevNodes++;
             vector<State<T>*> adjList = s->getAllPossibleStates(p);
             // Get all adjacent vertices of the dequeued
             // vertex s. If a adjacent has not been visited,

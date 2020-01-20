@@ -17,6 +17,9 @@ State<Cell>* Matrix:: getInitialState() {
 bool Matrix:: isGoalState(State<Cell> *state) {
     return (goalState->operator==(state));
 }
+State<Cell>* Matrix::getGoalState() {
+    return goalState;
+}
 vector<State<Cell>*> Matrix:: getAllPossibleStates(State<Cell> *state) {
     vector<State<Cell>*> adjList;
     //gets i,j - location on the matrix
@@ -38,6 +41,7 @@ vector<State<Cell>*> Matrix:: getAllPossibleStates(State<Cell> *state) {
         adjList.pop_back();
         if (checker->getStateObj().getRow() >= 0 && checker->getStateObj().getRow() <= rows-1 && checker->getStateObj().getColumn() >= 0 && checker->getStateObj().getColumn() <= columns-1) {
             adjList.insert(adjList.begin(), checker);
+            checker->setStateCost(matrix[checker->getStateObj().getRow()][checker->getStateObj().getColumn()]);
         }
     }
     return adjList;
@@ -48,4 +52,5 @@ double Matrix::getStateValue(State<Cell> *state) {
 
 void Matrix::setStateValue(State<Cell> *state, double val) {
     matrix[state->getStateObj().getRow()][state->getStateObj().getColumn()] = val;
+    state->setStateCost(val);
 }

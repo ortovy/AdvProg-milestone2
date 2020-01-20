@@ -1,44 +1,56 @@
 //
-// Created by omer on 19/01/2020.
+// Created by omer on 21/01/2020.
 //
 
-#ifndef ADVPROG_MILESTONE2_BESTFS_H
-#define ADVPROG_MILESTONE2_BESTFS_H
+#ifndef ADVPROG_MILESTONE2_ASTAR_H
+#define ADVPROG_MILESTONE2_ASTAR_H
 
-#include "Searcher.h"
-#include <vector>
+#include <tgmath.h>
+#import "Searcher.h"
+#include "Cell.h"
 template <typename T>
-class BestFS: public Searcher<T, vector<State<T>*>> {
+class AStar:  public Searcher<T, vector<State<T>*>> {
     vector<State<T>*> visited;
 public:
     vector<State<T>*> search(Searchable<T> *s) {
         this->PQueue->pushPQ(s->getInitialState());
+        State<T> *initial = s->getInitialState();
+        initial->setStateCost(initial->getStateCost()+ heuristicDis(initial, s));
         while (!this->PQueue->isEmpty()) {
             State<T> *p = this->PQueue->topPQ();
             this->PQueue->popPQ(p);
+            double nH = heuristicDis(p, s);
             this->numOfDevNodes++;
             visited.push_back(p);
-            if (s->isGoalState(p)) {
+            if (p == s->getGoalState()) {
                 return pathToGoal(p, s);
             }
             vector<State<T>*> adjList = s->getAllPossibleStates(p);
             for (State<T> *i : adjList) {
                 if ((!contains(i)) && (!this->PQueue->existInPQueue(i))) {
                     i->setPrevious(p);
-                    s->setStateValue(i, s->getStateValue(i) + s->getStateValue(i->getPrevious()));
+                    i->setStateCost(i->getStateCost() + i->getPrevious()->getStateCost() + heuristicDis(i, s) - nH);
                     this->PQueue->pushPQ(i);
                 } else {
-                    if(!contains(i)) {
+                    if (!contains(i)) {
                         i->setPrevious(p);
-                        s->setStateValue(i, s->getStateValue(i) + s->getStateValue(i->getPrevious()));
+                        s->setStateValue(i, i->getStateCost()+ i->getPrevious()->getStateCost() + heuristicDis(i, s) - nH);
                         if (s->getStateValue(i) < s->getStateValue(this->PQueue->valInPQueue(i))) {
-                            //this->deleteState(i);
                             this->PQueue->pushPQ(i);
                         }
                     }
                 }
             }
         }
+    }
+    double heuristicDis(State<Cell> *state, Searchable<Cell> *searchable) {
+        double heuristicDis;
+        int row1 = searchable->getGoalState()->getStateObj().getRow();
+        int column1 = searchable->getGoalState()->getStateObj().getColumn();
+        int row2 = state->getStateObj().getRow();
+        int column2 = state->getStateObj().getColumn();
+        heuristicDis = sqrt(pow(column2 - column1, 2) + pow(row2 - row2, 2));
+        return heuristicDis;
     }
     vector<State<T>*> pathToGoal(State<T> *goallState, Searchable<T> *searchable) {
         vector<State<T>*> pathToGoal;
@@ -58,7 +70,8 @@ public:
         }
         return false;
     }
+
 };
 
 
-#endif //ADVPROG_MILESTONE2_BESTFS_H
+#endif //ADVPROG_MILESTONE2_ASTAR_H

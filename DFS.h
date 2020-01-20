@@ -15,7 +15,6 @@
 template <typename T>
 class DFS: public Searcher<T, vector<State<T>*>> {
     vector<State<T>*> visited;
-    int numOfDevNodes = 0;
 public:
     vector<State<T>*> search(Searchable<T> *s) {
         // Create a stack for DFS
@@ -30,7 +29,7 @@ public:
             // Pop a vertex from stack and print it
             p = stack.top();
             stack.pop();
-            numOfDevNodes++;
+            this->numOfDevNodes++;
             vector<State<T>*> adjList = s->getAllPossibleStates(p);
             // Get all adjacent vertices of the popped vertex s
             // If a adjacent has not been visited, then push it
@@ -64,9 +63,6 @@ public:
         }
         reverse(pathToGoal.begin(), pathToGoal.end());
         return pathToGoal;
-    }
-    int getNumOfDevNodes() {
-        return this->numOfDevNodes;
     }
 };
 

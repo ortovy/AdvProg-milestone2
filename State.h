@@ -11,7 +11,6 @@ class State {
     T state;
     double cost;
     State<T> *previous;
-    double firstCost;
 
 public:
         State(T s): state(s) {
@@ -22,7 +21,7 @@ public:
         return (this->state == s->getStateObj());
     }
     bool operator<(State<T> *s) {
-        return (this->state < s->getStateObj());
+        return (this->cost < s->getStateCost);
     }
     T getStateObj() {
         return this->state;
@@ -32,6 +31,12 @@ public:
     }
     State<T>* getPrevious() {
         return this->previous;
+    }
+    void setStateCost(double c) {
+        this->cost = c;
+    }
+    double getStateCost() {
+        return this->cost;
     }
 };
 

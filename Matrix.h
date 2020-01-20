@@ -18,6 +18,7 @@ class Matrix: public Searchable<Cell> {
 public:
     Matrix(int rows, int columns, vector<vector<double>> matrix, State<Cell> *initial, State<Cell> *goal);
     State<Cell>* getInitialState();
+    State<Cell>* getGoalState();
     bool isGoalState(State<Cell> *state);
     vector<State<Cell>*> getAllPossibleStates(State<Cell> *state);
     double getStateValue(State<Cell> *state);

@@ -17,6 +17,7 @@ public:
     virtual vector<State<T>*> getAllPossibleStates(State<T> *state) = 0;
     virtual double getStateValue(State<T> *state) = 0;
     virtual void setStateValue(State<T> *state, double val) = 0;
+    virtual string toString() = 0;
 };
 
 #endif //ADVPROG_MILESTONE2_SEARCHABLE_H

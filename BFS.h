@@ -36,7 +36,8 @@ public:
             // vertex s. If a adjacent has not been visited,
             // then mark it visited and enqueue it
             for(State<T>* i :adjList) {
-                if (!contains(i) && s->getStateValue(i) != -1) {
+                if (!contains(i)) {
+                    //if (!contains(i) && s->getStateValue(i) != -1) {
                     visited.push_back(i);
                     queue.push_back(i);
                     i->setPrevious(p);
@@ -63,6 +64,7 @@ public:
         pathToGoal.push_back(goallState);
         while (!(goallState == searchable->getInitialState())) {
             pathToGoal.push_back(goallState->getPrevious());
+            this->totalCost += goallState->getStateInitialCost();
             goallState = goallState->getPrevious();
         }
         reverse(pathToGoal.begin(), pathToGoal.end());

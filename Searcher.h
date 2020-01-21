@@ -15,10 +15,14 @@ class Searcher {
 protected:
     MyPQueue<T> *PQueue = new MyPQueue<T>();
     int numOfDevNodes = 0;
+    double totalCost = 0;
 public:
     virtual S search(Searchable<T> *s) = 0;
     virtual int getNumOfDevNodes() {
         return this->numOfDevNodes;
+    }
+    virtual double getTotalCost() {
+        return this->totalCost;
     }
 };
 

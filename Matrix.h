@@ -9,6 +9,7 @@
 #include "State.h"
 #include "Cell.h"
 #include <vector>
+#include <string>
 class Matrix: public Searchable<Cell> {
     int rows;
     int columns;
@@ -23,6 +24,7 @@ public:
     vector<State<Cell>*> getAllPossibleStates(State<Cell> *state);
     double getStateValue(State<Cell> *state);
     void setStateValue(State<Cell> *state, double val);
+    string toString();
 };
 
 #endif //ADVPROG_MILESTONE2_MATRIX_H

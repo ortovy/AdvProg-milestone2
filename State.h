@@ -10,10 +10,11 @@ template<typename T>
 class State {
     T state;
     double cost;
+    double initialCost;
     State<T> *previous;
 
 public:
-        State(T s): state(s) {
+    State(T s): state(s) {
         this->state = s;
         this->previous = nullptr;
     }
@@ -37,6 +38,12 @@ public:
     }
     double getStateCost() {
         return this->cost;
+    }
+    double getStateInitialCost() {
+        return this->initialCost;
+    }
+     void setStateInitialCost(double initCost) {
+        this->initialCost = initCost;
     }
 };
 

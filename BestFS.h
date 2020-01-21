@@ -45,6 +45,7 @@ public:
         pathToGoal.push_back(goallState);
         while (!(goallState == searchable->getInitialState())) {
             pathToGoal.push_back(goallState->getPrevious());
+            this->totalCost += goallState->getStateInitialCost();
             goallState = goallState->getPrevious();
         }
         reverse(pathToGoal.begin(), pathToGoal.end());
@@ -59,6 +60,5 @@ public:
         return false;
     }
 };
-
 
 #endif //ADVPROG_MILESTONE2_BESTFS_H

@@ -18,8 +18,13 @@ public:
     bool isEmpty() {
         return(priorityQueue.empty());
     }
+    void emptyPQ() {
+        while(!this->priorityQueue.empty()) {
+            priorityQueue.pop();
+        }
+    }
     bool existInPQueue(State<T>* s1) {
-        /**
+        /**\
         for (int i = 0; i < PQ.size(); i++) {
             if (PQ[i] == s1) {
                 return true;
@@ -31,7 +36,7 @@ public:
         while (!helper.empty()) {
             State<T> *s2 = helper.top();
             helper.pop();
-            if (s1 == s2) {
+            if (s1->operator==(s2)) {
                 return true;
             }
         }
@@ -42,7 +47,7 @@ public:
         while (!helper.empty()) {
             State<T> *s2 = helper.top();
             helper.pop();
-            if (s == s2) {
+            if (s->operator==(s2)) {
                 return s2;
             }
         }

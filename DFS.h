@@ -35,7 +35,8 @@ public:
             // If a adjacent has not been visited, then push it
             // to the stack.
             for (State<T>* i :adjList) {
-                if (!contains(i) && s->getStateValue(i) != -1) {
+                if (!contains(i)) {
+                    //if (!contains(i) && s->getStateValue(i) != -1) {
                     stack.push(i);
                     i->setPrevious(p);
                     visited.push_back(i);
@@ -59,6 +60,7 @@ public:
         pathToGoal.push_back(goallState);
         while (!(goallState == searchable->getInitialState())) {
             pathToGoal.push_back(goallState->getPrevious());
+            this->totalCost += goallState->getStateInitialCost();
             goallState = goallState->getPrevious();
         }
         reverse(pathToGoal.begin(), pathToGoal.end());

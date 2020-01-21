@@ -9,6 +9,7 @@ Matrix::Matrix(int rows, int columns, vector<vector<double>> matrix, State<Cell>
     this->matrix = matrix;
     this->initialState = initial;
     this->goalState = goal;
+    this->initialState->setStateInitialCost(matrix[initialState->getStateObj().getRow()][initialState->getStateObj().getColumn()]);
 }
 
 State<Cell>* Matrix:: getInitialState() {
@@ -39,9 +40,13 @@ vector<State<Cell>*> Matrix:: getAllPossibleStates(State<Cell> *state) {
     for (int i = 0; i < 4; i++) {
         State<Cell> *checker = adjList.back();
         adjList.pop_back();
-        if (checker->getStateObj().getRow() >= 0 && checker->getStateObj().getRow() <= rows-1 && checker->getStateObj().getColumn() >= 0 && checker->getStateObj().getColumn() <= columns-1) {
-            adjList.insert(adjList.begin(), checker);
-            checker->setStateCost(matrix[checker->getStateObj().getRow()][checker->getStateObj().getColumn()]);
+        if (checker->getStateObj().getRow() >= 0 && checker->getStateObj().getRow() <= rows-1 && checker->getStateObj().getColumn() >= 0 && checker->getStateObj().getColumn() <= columns-1 ) {
+            double cost = matrix[checker->getStateObj().getRow()][checker->getStateObj().getColumn()];
+            if (cost != -1) {
+                adjList.insert(adjList.begin(), checker);
+                checker->setStateCost(cost);
+                checker->setStateInitialCost(cost);
+            }
         }
     }
     return adjList;
@@ -53,4 +58,16 @@ double Matrix::getStateValue(State<Cell> *state) {
 void Matrix::setStateValue(State<Cell> *state, double val) {
     matrix[state->getStateObj().getRow()][state->getStateObj().getColumn()] = val;
     state->setStateCost(val);
+}
+string Matrix::toString() {
+    string matrixStr;
+    matrixStr.append("#" + to_string(initialState->getStateObj().getRow()) + ","+ to_string(initialState->getStateObj().getColumn()));
+    matrixStr.append("*" + to_string(goalState->getStateObj().getRow()) + "," + to_string(goalState->getStateObj().getColumn()));
+    for (int i = 0; i<rows; i++) {
+        matrixStr.append("&");
+        for(int j = 0; j<columns; j++) {
+            matrixStr.append(to_string(matrix[i][j]));
+            matrixStr.append("^");
+        }
+    }
 }

@@ -13,29 +13,30 @@ class AStar:  public Searcher<T, vector<State<T>*>> {
     vector<State<T>*> visited;
 public:
     vector<State<T>*> search(Searchable<T> *s) {
-        this->PQueue->pushPQ(s->getInitialState());
         State<T> *initial = s->getInitialState();
         initial->setStateCost(initial->getStateCost()+ heuristicDis(initial, s));
+        this->PQueue->pushPQ(s->getInitialState());
         while (!this->PQueue->isEmpty()) {
             State<T> *p = this->PQueue->topPQ();
             this->PQueue->popPQ(p);
+            this->PQueue->emptyPQ();
             double nH = heuristicDis(p, s);
             this->numOfDevNodes++;
             visited.push_back(p);
-            if (p == s->getGoalState()) {
+            if (p->operator==(s->getGoalState())) {
                 return pathToGoal(p, s);
             }
             vector<State<T>*> adjList = s->getAllPossibleStates(p);
             for (State<T> *i : adjList) {
                 if ((!contains(i)) && (!this->PQueue->existInPQueue(i))) {
                     i->setPrevious(p);
-                    i->setStateCost(i->getStateCost() + i->getPrevious()->getStateCost() + heuristicDis(i, s) - nH);
+                    s->setStateValue(i, i->getStateCost() + i->getPrevious()->getStateCost() + heuristicDis(i, s));
                     this->PQueue->pushPQ(i);
                 } else {
                     if (!contains(i)) {
                         i->setPrevious(p);
-                        s->setStateValue(i, i->getStateCost()+ i->getPrevious()->getStateCost() + heuristicDis(i, s) - nH);
-                        if (s->getStateValue(i) < s->getStateValue(this->PQueue->valInPQueue(i))) {
+                        s->setStateValue(i, i->getStateCost()+ i->getPrevious()->getStateCost() + heuristicDis(i, s));
+                        if (i->getStateCost() < this->PQueue->valInPQueue(i)->getStateCost()) {
                             this->PQueue->pushPQ(i);
                         }
                     }
@@ -49,7 +50,7 @@ public:
         int column1 = searchable->getGoalState()->getStateObj().getColumn();
         int row2 = state->getStateObj().getRow();
         int column2 = state->getStateObj().getColumn();
-        heuristicDis = sqrt(pow(column2 - column1, 2) + pow(row2 - row2, 2));
+        heuristicDis = sqrt(pow(column2 - column1, 2) + pow(row2 - row1, 2));
         return heuristicDis;
     }
     vector<State<T>*> pathToGoal(State<T> *goallState, Searchable<T> *searchable) {
@@ -57,6 +58,7 @@ public:
         pathToGoal.push_back(goallState);
         while (!(goallState == searchable->getInitialState())) {
             pathToGoal.push_back(goallState->getPrevious());
+            this->totalCost += goallState->getStateInitialCost();
             goallState = goallState->getPrevious();
         }
         reverse(pathToGoal.begin(), pathToGoal.end());

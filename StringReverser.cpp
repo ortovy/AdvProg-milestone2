@@ -11,3 +11,6 @@ string StringReverser::solve(string s) {
     }
     return s;
 }
+string StringReverser::getSolverName() {
+    return "StringReverser";
+}

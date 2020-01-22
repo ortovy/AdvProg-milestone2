@@ -16,6 +16,9 @@ template <typename T>
 class DFS: public Searcher<T, vector<State<T>*>> {
     vector<State<T>*> visited;
 public:
+    DFS() {
+        this->searcherName = "DFS";
+    }
     vector<State<T>*> search(Searchable<T> *s) {
         // Create a stack for DFS
         stack<State<T>*> stack;

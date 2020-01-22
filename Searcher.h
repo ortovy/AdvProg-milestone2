@@ -13,11 +13,15 @@
 template <typename T,typename S>
 class Searcher {
 protected:
-    MyPQueue<T> *PQueue = new MyPQueue<T>();
     int numOfDevNodes = 0;
     double totalCost = 0;
+    string searcherName;
+    MyPQueue<T> *PQueue = new MyPQueue<T>();
 public:
     virtual S search(Searchable<T> *s) = 0;
+    virtual string getSearcherName() {
+        return this->searcherName;
+    }
     virtual int getNumOfDevNodes() {
         return this->numOfDevNodes;
     }

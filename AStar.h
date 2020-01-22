@@ -12,6 +12,9 @@ template <typename T>
 class AStar:  public Searcher<T, vector<State<T>*>> {
     vector<State<T>*> visited;
 public:
+    AStar<T>() {
+        this->searcherName = "AStar";
+    }
     vector<State<T>*> search(Searchable<T> *s) {
         State<T> *initial = s->getInitialState();
         initial->setStateCost(initial->getStateCost()+ heuristicDis(initial, s));

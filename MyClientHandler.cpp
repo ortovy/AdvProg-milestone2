@@ -8,11 +8,15 @@
 #include "Cell.h"
 #include "State.h"
 #include <string>
+MyClientHandler::MyClientHandler(CacheManager<string> *cache, Solver<Searchable<Cell>*, vector<State<Cell>*>> *s) {
+    this->cache = cache;
+    this->solver = s;
+}
 void MyClientHandler::handleClient(int clientSocket) {
     char buffer[1024] = {0};
     vector<string> linesFromClient;
     int valread = read(clientSocket , buffer, 1024);
-    while (strcmp(buffer, "end")) {
+    while (strnlen(buffer, "end")) {
         linesFromClient.push_back(buffer);
         memset(buffer,'\0',strlen(buffer));
         valread = read(clientSocket, buffer, 1024);
@@ -40,14 +44,14 @@ void MyClientHandler::handleClient(int clientSocket) {
     }
     numOfColumns = matrix[0].size();
     Searchable<Cell> *M = new Matrix(numOfRows, numOfColumns, matrix, init, goal);
-    string problem = M->toString();
-    if (cache.existsSolution(problem)) {
-        string solution = cache.getSolution(problem);
+    string problem = solver->getSolverName() + M->toString();
+    if (cache->existsSolution(problem)) {
+        string solution = cache->getSolution(problem);
         send(clientSocket, solution.c_str(), solution.length(), 0);
     } else {
         vector<State<Cell>*> solverSolution = solver->solve(M);
         string solution = solutionToString(solverSolution);
-        cache.saveSolution(problem, solution);
+        cache->saveSolution(problem, solution);
         send(clientSocket, solution.c_str(), solution.length(), 0);
     }
     close(clientSocket);
@@ -72,16 +76,16 @@ string MyClientHandler::solutionToString(vector<State<Cell>*> solution) {
     for (int k = 1; k < solution.size(); k++) {
         int i2 = solution[k]->getStateObj().getRow();
         int j2 = solution[k]->getStateObj().getRow();
-        if (i1 < i2) { // below row- Down
+        if (i1 < i2) {
             solutionStr += "Down ";
-        } else if (i1 > i2) { //above row - Up
+        } else if (i1 > i2) {
             solutionStr += "Up ";
-        } else if (j1 < j2) { //right Cell - Right
+        } else if (j1 < j2) {
             solutionStr += "Right ";
-        } else if (j1 > j2) { //left Cell - Left
+        } else if (j1 > j2) {
             solutionStr += "Left ";
         }
-        solutionStr+= "(" + to_string(solution[k]->getStateInitialCost()) + ") ,";
+        solutionStr+= "(" + to_string(solution[k]->getStateCost()) + ") ,";
         i1 = i2;
         j1 = j2;
     }

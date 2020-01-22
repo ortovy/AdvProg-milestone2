@@ -15,6 +15,9 @@ template <typename T>
 class BFS: public Searcher<T, vector<State<T>*>> {
     vector<State<T>*> visited;
 public:
+    BFS() {
+        this->searcherName = "BFS";
+    }
     vector<State<T>*> search(Searchable<T> *s) {
         // Create a queue for BFS
         list<State<T>*> queue;

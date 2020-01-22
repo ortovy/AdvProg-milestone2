@@ -11,6 +11,9 @@ template <typename T>
 class BestFS: public Searcher<T, vector<State<T>*>> {
     vector<State<T>*> visited;
 public:
+    BestFS() {
+        this->searcherName = "BestFS";
+    }
     vector<State<T>*> search(Searchable<T> *s) {
         this->PQueue->pushPQ(s->getInitialState());
         while (!this->PQueue->isEmpty()) {

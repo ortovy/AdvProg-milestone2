@@ -30,23 +30,8 @@ void MySerialServer::open(int port, ClientHandler *c) {
     } else{
         std::cout<<"Server is now listening ..."<<std::endl;
     }
-    //hread serverThread(&MySerialServer::acceptClients(socketfd, address, c));
     thread thread1([=] {acceptClients(socketfd, address, c); });
     thread1.join();
-    /**
-    thread serverThread([](int socketfd, sockaddr_in address, ClientHandler *c){
-        cout << "thread function\n";
-        struct timeval tv;
-        tv.tv_sec = 120;
-        setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
-        int client_socket = accept(socketfd, (struct sockaddr *)&address, (socklen_t*)&address);
-        while (client_socket != -1) {
-            c->handleClient(client_socket);
-            int client_socket = accept(socketfd, (struct sockaddr *)&address, (socklen_t*)&address);
-        }
-    }, socketfd, address, c);
-    serverThread.join();
-     */
 }
 void MySerialServer::stop() {
     close(socketfd);
@@ -58,6 +43,7 @@ void MySerialServer:: acceptClients(int socketfd, sockaddr_in address, ClientHan
     setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
     int client_socket = accept(socketfd, (struct sockaddr *)&address, (socklen_t*)&address);
     while (client_socket != -1) {
+        cout<<"accept client";
         c->handleClient(client_socket);
         client_socket = accept(socketfd, (struct sockaddr *)&address, (socklen_t*)&address);
     }

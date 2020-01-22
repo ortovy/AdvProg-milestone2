@@ -14,10 +14,14 @@
 #include <iostream>
 #include <string.h>
 #include "vector"
+#include "Solver.h"
 using namespace std;
 class MyClientHandler: public ClientHandler{
-    FileCacheManager cache;
+    CacheManager<string> *cache;
+    Solver<Searchable<Cell>*, vector<State<Cell>*>> *solver;
+
 public:
+    MyClientHandler(CacheManager<string> *cache, Solver<Searchable<Cell>*, vector<State<Cell>*>> *s);
     void handleClient(int clientSocket);
     vector<double> splitByComma(string line);
     string solutionToString(vector<State<Cell>*> solution);

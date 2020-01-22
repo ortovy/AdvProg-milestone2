@@ -1,6 +1,7 @@
 #include <iostream>
 #include "MySerialServer.h"
 #include "MyTestClientHandler.h"
+#include "FileCacheManager.h"
 #include <vector>
 #include "Matrix.h"
 #include "Searchable.h"
@@ -8,14 +9,25 @@
 #import "DFS.h"
 #import "BestFS.h"
 #include "AStar.h"
+#include "SolverAdapter.h"
+#include "MyClientHandler.h"
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-   // MySerialServer s = MySerialServer();
-    //ClientHandler *c =  new MyTestClientHandler();
-    //s.open(5400, c);
-    vector<double > c1 = {1,1,1};
-    vector<double > c2 = {5,5,3};
-    vector<double > c3 = {5,5,5};
+    /**
+    cout << "Hello, World!" << std::endl;
+    MySerialServer s = MySerialServer();
+    ClientHandler *c =  new MyTestClientHandler();
+    s.open(5401, c);
+     */
+    FileCacheManager *cache;
+    Searcher<Cell, vector<State<Cell>*>> *n = new AStar<Cell>;
+    Solver<Searchable<Cell>*, vector<State<Cell>*>> *s = new SolverAdapter<Cell, vector<State<Cell>*>>(n);
+    ClientHandler *c =  new MyClientHandler(cache, s);
+    MySerialServer server = MySerialServer();
+    server.open(5400, c);
+    /**
+    vector<double> c1 = {1,1,1};
+    vector<double> c2 = {5,5,3};
+    vector<double> c3 = {5,5,5};
     vector<vector<double>> m;
     m.push_back(c1);
     m.push_back(c2);
@@ -26,4 +38,5 @@ int main() {
     Searcher<Cell, vector<State<Cell>*>> *n = new AStar<Cell>;
     vector<State<Cell>*> v = n->search(M);
     cout<<n->getNumOfDevNodes()<<endl;
+     */
 }

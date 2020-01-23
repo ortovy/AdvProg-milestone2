@@ -16,7 +16,8 @@ public:
         this->searcher = s;
     }
     S solve(Searchable<T> *problem) {
-        return this->searcher->search(problem);
+        S sol = this->searcher->search(problem);
+        return sol;
     }
     string getSolverName() {
         return this->searcher->getSearcherName();

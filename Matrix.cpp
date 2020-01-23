@@ -10,6 +10,8 @@ Matrix::Matrix(int rows, int columns, vector<vector<double>> matrix, State<Cell>
     this->initialState = initial;
     this->goalState = goal;
     this->initialState->setStateInitialCost(matrix[initialState->getStateObj().getRow()][initialState->getStateObj().getColumn()]);
+    this->initialState->setStateCost(matrix[initialState->getStateObj().getRow()][initialState->getStateObj().getColumn()]);
+
 }
 
 State<Cell>* Matrix:: getInitialState() {
@@ -70,4 +72,5 @@ string Matrix::toString() {
             matrixStr.append("^");
         }
     }
+    return matrixStr;
 }

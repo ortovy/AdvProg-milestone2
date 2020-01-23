@@ -24,7 +24,7 @@ public:
         }
     }
     bool existInPQueue(State<T>* s1) {
-        /**\
+        /**
         for (int i = 0; i < PQ.size(); i++) {
             if (PQ[i] == s1) {
                 return true;
@@ -80,7 +80,18 @@ public:
         priorityQueue = helper2;
 
     }
+    void deletePQ(State<T>* s) {
+        priority_queue<State<T>*> helper = priorityQueue;
+        while (!helper.empty()) {
+            State<T> *s2 = helper.top();
+            helper.pop();
+            priorityQueue.pop();
+            if(s2 != s) {
+                priorityQueue.push(s2);
+            }
+        }
+        priorityQueue = helper;
+    }
 };
-
 
 #endif //ADVPROG_MILESTONE2_MYPQUEUE_H

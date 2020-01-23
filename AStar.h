@@ -8,6 +8,7 @@
 #include <tgmath.h>
 #import "Searcher.h"
 #include "Cell.h"
+#import <iostream>
 template <typename T>
 class AStar:  public Searcher<T, vector<State<T>*>> {
     vector<State<T>*> visited;
@@ -17,12 +18,12 @@ public:
     }
     vector<State<T>*> search(Searchable<T> *s) {
         State<T> *initial = s->getInitialState();
-        initial->setStateCost(initial->getStateCost()+ heuristicDis(initial, s));
+        //initial->setStateCost(initial->getStateCost()+ heuristicDis(initial, s));
         this->PQueue->pushPQ(s->getInitialState());
         while (!this->PQueue->isEmpty()) {
             State<T> *p = this->PQueue->topPQ();
             this->PQueue->popPQ(p);
-            this->PQueue->emptyPQ();
+            //this->PQueue->emptyPQ();
             double nH = heuristicDis(p, s);
             this->numOfDevNodes++;
             visited.push_back(p);
@@ -33,13 +34,14 @@ public:
             for (State<T> *i : adjList) {
                 if ((!contains(i)) && (!this->PQueue->existInPQueue(i))) {
                     i->setPrevious(p);
-                    s->setStateValue(i, i->getStateCost() + i->getPrevious()->getStateCost() + heuristicDis(i, s));
+                    s->setStateValue(i, i->getStateCost() + i->getPrevious()->getStateCost() + heuristicDis(i, s) - nH);
                     this->PQueue->pushPQ(i);
                 } else {
                     if (!contains(i)) {
                         i->setPrevious(p);
-                        s->setStateValue(i, i->getStateCost()+ i->getPrevious()->getStateCost() + heuristicDis(i, s));
+                        s->setStateValue(i, i->getStateCost()+ i->getPrevious()->getStateCost() + heuristicDis(i, s)-nH);
                         if (i->getStateCost() < this->PQueue->valInPQueue(i)->getStateCost()) {
+                            this->PQueue->deletePQ(i);
                             this->PQueue->pushPQ(i);
                         }
                     }

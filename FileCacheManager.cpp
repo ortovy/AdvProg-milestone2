@@ -4,36 +4,41 @@
 
 #include "FileCacheManager.h"
 bool FileCacheManager:: existsSolution(string problem){
-    fstream fromFile;
-    string solution;
     string fileName = to_string(hasher(problem));
-    fromFile.open(fileName, ios::in|ios::binary);
-    if (!fromFile) {
-        return false;
+    ifstream fromFile;
+    fromFile.open(fileName);
+    if (fromFile) {
+        fromFile.close();
+        return true;
     }
-    fromFile.close();
-    return true;
+    return false;
 }
 string FileCacheManager:: getSolution(string problem){
-    fstream fromFile;
+    string temp;
     string solution;
+    ifstream fromFile;
     string fileName = to_string(hasher(problem));
-    fromFile.open(fileName, ios::in|ios::binary);
+    //fromFile.open(fileName, ios::in|ios::binary);
+    fromFile.open(fileName);
     if (!fromFile) {
-        throw ("failed to open file");
+        cout<<"failed to open file"<<endl;
     }
-    fromFile.read((char*)& solution, sizeof(solution));
+    while(!fromFile.eof()) {
+        fromFile >> temp;
+        solution+=temp;
+    }
     fromFile.close();
     return solution;
 }
 void FileCacheManager:: saveSolution(string problem, string solution){
-    fstream toFile;
     string fileName = to_string(hasher(problem));
-    toFile.open(fileName, ios::out|ios::binary);
+    ofstream toFile;
+    toFile.open(fileName);
     if (!toFile) {
-        throw ("failed to open file");
+        cout<<"failed to open file"<<endl;
+        return;
     }
-    toFile.write((char*)&solution, sizeof(solution));
+    toFile<<solution;
     toFile.close();
     return;
 }

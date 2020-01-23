@@ -18,12 +18,12 @@ int main() {
     ClientHandler *c =  new MyTestClientHandler();
     s.open(5401, c);
      */
-    FileCacheManager *cache;
-    Searcher<Cell, vector<State<Cell>*>> *n = new AStar<Cell>;
+    FileCacheManager *cache = new FileCacheManager();
+    Searcher<Cell, vector<State<Cell>*>> *n = new BestFS<Cell>;
     Solver<Searchable<Cell>*, vector<State<Cell>*>> *s = new SolverAdapter<Cell, vector<State<Cell>*>>(n);
     ClientHandler *c =  new MyClientHandler(cache, s);
     MySerialServer server = MySerialServer();
-    server.open(5400, c);
+    server.open(5401, c);
     /**
     vector<double> c1 = {1,1,1};
     vector<double> c2 = {5,5,3};

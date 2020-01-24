@@ -12,14 +12,29 @@ MyClientHandler::MyClientHandler(CacheManager<string> *cache, Solver<Searchable<
     this->cache = cache;
     this->solver = s;
 }
-void MyClientHandler::handleClient(int clientSocket) {
+ClientHandler * MyClientHandler::clone() {
+    auto solverClone = this->solver->clone();
+    MyClientHandler *clone = new MyClientHandler(cache, solverClone);
+    return clone;
+}
+    void MyClientHandler::handleClient(int clientSocket) {
     char buffer[1024] = {0};
     vector<string> linesFromClient;
+    string temp1;
     int valread = read(clientSocket , buffer, 1024);
-    while (strcmp(buffer, "end")) {
-        linesFromClient.push_back(buffer);
+    while (strcmp(buffer, "end\n") && valread > 0) {
+        temp1+= buffer;
         memset(buffer,'\0',strlen(buffer));
         valread = read(clientSocket, buffer, 1024);
+    }
+    string temp2;
+    for (int i =0; i<temp1.size();i++) {
+        if (temp1[i] == '\n') {
+            linesFromClient.push_back(temp2);
+            temp2="";
+        } else {
+            temp2+=temp1[i];
+        }
     }
     //create the exit state
     string temp = linesFromClient.back();
@@ -69,7 +84,9 @@ vector<double> MyClientHandler:: splitByComma(string line) {
         values.push_back(stoi(token));
         line.erase(0, pos + delimiter.length());
     }
-    values.push_back(stoi(line));
+    if(line != "") {
+        values.push_back(stoi(line));
+    }
     return values;
 }
 string MyClientHandler::solutionToString(vector<State<Cell>*> solution) {
@@ -94,7 +111,6 @@ string MyClientHandler::solutionToString(vector<State<Cell>*> solution) {
         i1 = i2;
         j1 = j2;
     }
-    //solutionStr = solutionStr.substr(0, solutionStr.size()-1);;
     solutionStr = solutionStr.erase(solutionStr.length() - 1, 1);
     return solutionStr;
 }

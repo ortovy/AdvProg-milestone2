@@ -18,6 +18,9 @@ public:
     BFS() {
         this->searcherName = "BFS";
     }
+    Searcher<T, vector<State<T>*>>* clone() {
+        return new BFS<T>();
+    }
     vector<State<T>*> search(Searchable<T> *s) {
         // Create a queue for BFS
         list<State<T>*> queue;

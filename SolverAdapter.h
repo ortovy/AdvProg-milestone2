@@ -10,7 +10,7 @@
 #include "Searcher.h"
 template <typename T, typename S>
 class SolverAdapter: public Solver<Searchable<T>*, S> {
-    Searcher<T,S> * searcher;
+    Searcher<T,S>* searcher;
 public:
     SolverAdapter(Searcher<T, S> *s) {
         this->searcher = s;
@@ -21,6 +21,10 @@ public:
     }
     string getSolverName() {
         return this->searcher->getSearcherName();
+    }
+    Solver<Searchable<T>*, vector<State<T>*>>* clone() {
+        Searcher<T, S>* searcherClone = this->searcher->clone();
+        return new SolverAdapter(searcherClone);
     }
 };
 

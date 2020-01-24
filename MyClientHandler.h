@@ -25,6 +25,8 @@ public:
     void handleClient(int clientSocket);
     vector<double> splitByComma(string line);
     string solutionToString(vector<State<Cell>*> solution);
+    ClientHandler* clone();
+
 };
 
 

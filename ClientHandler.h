@@ -9,6 +9,7 @@
 class ClientHandler {
 public:
     virtual void handleClient(int clientSocket) = 0;
+    virtual ClientHandler* clone() = 0;
 };
 
 #endif //ADVPROG_MILESTONE2_CLIENTHANDLER_H

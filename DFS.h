@@ -19,6 +19,9 @@ public:
     DFS() {
         this->searcherName = "DFS";
     }
+    Searcher<T, vector<State<T>*>>* clone() {
+        return new DFS<T>();
+    }
     vector<State<T>*> search(Searchable<T> *s) {
         // Create a stack for DFS
         stack<State<T>*> stack;

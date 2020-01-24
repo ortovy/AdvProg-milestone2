@@ -19,6 +19,7 @@ protected:
     MyPQueue<T> *PQueue = new MyPQueue<T>();
 public:
     virtual S search(Searchable<T> *s) = 0;
+    virtual Searcher* clone() = 0;
     virtual string getSearcherName() {
         return this->searcherName;
     }

@@ -11,6 +11,7 @@
 #include "AStar.h"
 #include "SolverAdapter.h"
 #include "MyClientHandler.h"
+#include "MyParallelServer.h"
 int main() {
     /**
     cout << "Hello, World!" << std::endl;
@@ -19,11 +20,12 @@ int main() {
     s.open(5401, c);
      */
     FileCacheManager *cache = new FileCacheManager();
-    Searcher<Cell, vector<State<Cell>*>> *n = new BestFS<Cell>;
+    Searcher<Cell, vector<State<Cell>*>> *n = new AStar<Cell>;
     Solver<Searchable<Cell>*, vector<State<Cell>*>> *s = new SolverAdapter<Cell, vector<State<Cell>*>>(n);
     ClientHandler *c =  new MyClientHandler(cache, s);
-    MySerialServer server = MySerialServer();
-    server.open(5401, c);
+    //MySerialServer server = MySerialServer();
+    MyParallelServer server = MyParallelServer();
+    server.open(5400, c);
     /**
     vector<double> c1 = {1,1,1};
     vector<double> c2 = {5,5,3};

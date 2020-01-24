@@ -14,6 +14,9 @@ public:
     BestFS() {
         this->searcherName = "BestFS";
     }
+    Searcher<T, vector<State<T>*>>* clone() {
+        return new BestFS<T>();
+    }
     vector<State<T>*> search(Searchable<T> *s) {
         this->PQueue->pushPQ(s->getInitialState());
         while (!this->PQueue->isEmpty()) {
@@ -28,13 +31,13 @@ public:
             for (State<T> *i : adjList) {
                 if ((!contains(i)) && (!this->PQueue->existInPQueue(i))) {
                     i->setPrevious(p);
-                    s->setStateValue(i, s->getStateValue(i) + s->getStateValue(i->getPrevious()));
+                    s->setStateValue(i, i->getStateCost() + i->getPrevious()->getStateCost());
                     this->PQueue->pushPQ(i);
                 } else {
                     if(!contains(i)) {
                         i->setPrevious(p);
-                        s->setStateValue(i, s->getStateValue(i) + s->getStateValue(i->getPrevious()));
-                        if (s->getStateValue(i) < s->getStateValue(this->PQueue->valInPQueue(i))) {
+                        s->setStateValue(i, i->getStateCost()+ i->getPrevious()->getStateCost());
+                        if (i->getStateCost() < this->PQueue->valInPQueue(i)->getStateCost()) {
                             //this->deleteState(i);
                             this->PQueue->pushPQ(i);
                         }

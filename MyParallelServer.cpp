@@ -1,9 +1,10 @@
 //
-// Created by omer on 12/01/2020.
+// Created by omer on 23/01/2020.
 //
 
-#include "MySerialServer.h"
-void MySerialServer::open(int port, ClientHandler *c) {
+#include "MyParallelServer.h"
+
+void MyParallelServer::open(int port, ClientHandler *c) {
     socketfd = socket(AF_INET, SOCK_STREAM, 0);
     if (socketfd == -1) {
         //error
@@ -30,21 +31,33 @@ void MySerialServer::open(int port, ClientHandler *c) {
     } else{
         std::cout<<"Server is now listening ..."<<std::endl;
     }
-    thread thread1([=] {acceptClients(socketfd, address, c); });
+    std::thread thread1(&MyParallelServer::acceptClients, MyParallelServer(), socketfd, address, c);
     thread1.join();
 }
-void MySerialServer::stop() {
-    close(socketfd);
+void MyParallelServer::stop() {
+    this->stopp = true;
 }
-void MySerialServer:: acceptClients(int socketfd, sockaddr_in address, ClientHandler *c) {
+void MyParallelServer:: acceptClients(int socketfd, sockaddr_in address, ClientHandler *c) {
+    vector<thread> threadVec;
     struct timeval tv;
     tv.tv_sec = 60;
     setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
-    int client_socket = accept(socketfd, (struct sockaddr *)&address, (socklen_t*)&address);
-    while (client_socket != -1) {
+    while (!stopp) {
+        int client_socket = accept(socketfd, (struct sockaddr *) &address, (socklen_t *) &address);
+        if (client_socket == -1) {
+            if (errno == EWOULDBLOCK) {
+                this->stop();
+                cout << "TimeOut" << endl;
+                break;
+            } else {
+                perror("Error accepting client");
+                exit(1);
+            }
+        }
         cout<<"client in connected"<<endl;
-        c->handleClient(client_socket);
-        client_socket = accept(socketfd, (struct sockaddr *)&address, (socklen_t*)&address);
+
+        ClientHandler* newC = c->clone();
+        std::thread clientThread(&ClientHandler::handleClient, newC, client_socket);
+        clientThread.detach();
     }
-    stop();
 }

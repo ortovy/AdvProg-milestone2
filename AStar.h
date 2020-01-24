@@ -16,6 +16,9 @@ public:
     AStar<T>() {
         this->searcherName = "AStar";
     }
+    Searcher<T, vector<State<T>*>>* clone() {
+        return new AStar<T>();
+    }
     vector<State<T>*> search(Searchable<T> *s) {
         State<T> *initial = s->getInitialState();
         //initial->setStateCost(initial->getStateCost()+ heuristicDis(initial, s));

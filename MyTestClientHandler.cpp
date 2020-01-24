@@ -2,10 +2,13 @@
 // Created by omer on 12/01/2020.
 //
 
-
 #include "MyTestClientHandler.h"
 #include <sys/socket.h>
 #include <unistd.h>
+ClientHandler * MyTestClientHandler::clone() {
+    MyTestClientHandler *newC = new MyTestClientHandler();
+    return newC;
+}
 void MyTestClientHandler::handleClient(int clientSocket) {
     char buffer[1024] = {0};
     int valread = read(clientSocket , buffer, 1024);
@@ -16,7 +19,7 @@ void MyTestClientHandler::handleClient(int clientSocket) {
             string m= cache.getSolution(buffer);
             msg = strcpy(new char[m.length() + 1], m.c_str());
         } else {
-            string result = s.solve(buffer) + "\n";
+            string result = s->solve(buffer) + "\n";
             msg = strcpy(new char[result.length() + 1], result.c_str());
             cache.saveSolution(buffer, result);
         }

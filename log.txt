@@ -1,0 +1,83 @@
+commit 280dd3ad4db29b23e46f4baf698b2fcb9e34080b
+Author: omer <omerabargel8@gmail.com>
+Date:   Sun Jan 26 12:59:55 2020 +0200
+
+    add experiment file
+
+commit 4b623905382dd03ac79187c39234fe049bc18dec
+Author: omer <omerabargel8@gmail.com>
+Date:   Sun Jan 26 12:53:40 2020 +0200
+
+    documentation and notes
+
+commit 4a3081897c7c669f75f69795f4cb6f99a49c4993
+Author: omer <omerabargel8@gmail.com>
+Date:   Fri Jan 24 16:49:20 2020 +0200
+
+    create parallel server
+
+commit a556ca14a445f3d16e687780b4e13d65797fb13b
+Author: omer <omerabargel8@gmail.com>
+Date:   Thu Jan 23 18:12:33 2020 +0200
+
+    fix MyClientHandler
+
+commit dd5313dc531d9ac650ab58ef001c422c47aae865
+Author: omer <omerabargel8@gmail.com>
+Date:   Wed Jan 22 13:13:44 2020 +0200
+
+    fix cache manager & create SolverAdapter
+
+commit 226c8b849f59ad3a90d248afe95a4fbda8dc5f1f
+Author: omer <omerabargel8@gmail.com>
+Date:   Wed Jan 22 00:11:28 2020 +0200
+
+    working on insert client strings in to Searchable
+
+commit a798f00bda4313d2dad1c5a02e7aaf5773336bef
+Author: omer <omerabargel8@gmail.com>
+Date:   Tue Jan 21 01:14:11 2020 +0200
+
+    fix BestFS & working on A*
+
+commit 8d817af14ea83a803bc386e399a68eeace9b7f87
+Author: omer <omerabargel8@gmail.com>
+Date:   Sun Jan 19 22:09:20 2020 +0200
+
+    working on BestFS algorithm
+
+commit 71512b393e146134ab181cffd418b065f09a74b8
+Author: omer <omerabargel8@gmail.com>
+Date:   Sun Jan 19 19:20:16 2020 +0200
+
+    working on DFS algorithm
+
+commit 72a5312cb2600f54fe2b5af08c2f42f70cd7e254
+Author: omer <omerabargel8@gmail.com>
+Date:   Fri Jan 17 14:35:48 2020 +0200
+
+    working searcher & searchable interfaces
+
+commit ee51b2ebe9b462d037c7bcaa4e81624aab2dbe9b
+Author: omer <omerabargel8@gmail.com>
+Date:   Thu Jan 16 00:37:16 2020 +0200
+
+    working on BFS algorithm
+
+commit 29602dc1290a2c0eeb76598594537c8176e729f4
+Author: omer <omerabargel8@gmail.com>
+Date:   Wed Jan 15 23:39:00 2020 +0200
+
+    working on Searchable
+
+commit 75bb4cdff7ae311768d87e848e37e189ad176bd1
+Author: omer <omerabargel8@gmail.com>
+Date:   Wed Jan 15 11:34:03 2020 +0200
+
+    fix chacheManager
+
+commit 700e68afec88533d05dd3fb7fbfee787d1b78bdd
+Author: omer <omerabargel8@gmail.com>
+Date:   Wed Jan 15 10:32:23 2020 +0200
+
+    initial commit

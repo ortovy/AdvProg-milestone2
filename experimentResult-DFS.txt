@@ -1,0 +1,40 @@
+10X10 MATRIX
+Right (24) ,Right (40) ,Right (44) ,Right (61) ,Right (63) ,Right (74) ,Right (89) ,Right (94) ,Down (95) ,Right (97) ,Down (116) ,Down (121) ,Left (129) ,Left (131) ,Left (151) ,Left (164) ,Left (182) ,Left (188) ,Left (202) ,Left (209) ,Left (214) ,Down (218) ,Down (222) ,Right (226) ,Right (244) ,Right (258) ,Right (274) ,Right (275) ,Down (294) ,Right (312) ,Right (312) ,Right (327) ,Right (336) ,Down (349) ,Down (364) ,Down (369) 
+Developed Nodes:56
+
+15X15 MATRIX
+Right (24) ,Right (40) ,Right (44) ,Right (61) ,Right (63) ,Right (74) ,Right (89) ,Right (94) ,Down (95) ,Right (97) ,Down (116) ,Down (121) ,Left (129) ,Left (131) ,Left (151) ,Left (164) ,Left (182) ,Left (188) ,Left (202) ,Left (209) ,Left (214) ,Down (218) ,Down (222) ,Right (226) ,Right (244) ,Right (258) ,Right (274) ,Right (275) ,Down (294) ,Right (312) ,Right (312) ,Right (327) ,Right (336) ,Down (349) ,Down (364) ,Down (369) 
+Developed Nodes:113
+
+20X20 MATRIX
+Right (24) ,Right (40) ,Right (44) ,Right (61) ,Right (63) ,Right (74) ,Right (89) ,Right (94) ,Down (95) ,Right (97) ,Down (116) ,Down (121) ,Left (129) ,Left (131) ,Left (151) ,Left (164) ,Left (182) ,Left (188) ,Left (202) ,Left (209) ,Left (214) ,Down (218) ,Down (222) ,Right (226) ,Right (244) ,Right (258) ,Right (274) ,Right (275) ,Down (294) ,Right (312) ,Right (312) ,Right (327) ,Right (336) ,Down (349) ,Down (364) ,Down (369) 
+Developed Nodes:212
+
+25X25 MATRIX
+Right (24) ,Right (40) ,Right (44) ,Right (61) ,Right (63) ,Right (74) ,Right (89) ,Right (94) ,Down (95) ,Right (97) ,Down (116) ,Down (121) ,Left (129) ,Left (131) ,Left (151) ,Left (164) ,Left (182) ,Left (188) ,Left (202) ,Left (209) ,Left (214) ,Down (218) ,Down (222) ,Right (226) ,Right (244) ,Right (258) ,Right (274) ,Right (275) ,Down (294) ,Right (312) ,Right (312) ,Right (327) ,Right (336) ,Down (349) ,Down (364) ,Down (369) 
+Developed Nodes:260
+
+30X30 MATRIX
+Right (24) ,Right (40) ,Right (44) ,Right (61) ,Right (63) ,Right (74) ,Right (89) ,Right (94) ,Down (95) ,Right (97) ,Down (116) ,Down (121) ,Left (129) ,Left (131) ,Left (151) ,Left (164) ,Left (182) ,Left (188) ,Left (202) ,Left (209) ,Left (214) ,Down (218) ,Down (222) ,Right (226) ,Right (244) ,Right (258) ,Right (274) ,Right (275) ,Down (294) ,Right (312) ,Right (312) ,Right (327) ,Right (336) ,Down (349) ,Down (364) ,Down (369) 
+Developed Nodes:370
+
+35X35 MATRIX
+Right (24) ,Right (40) ,Right (44) ,Right (61) ,Right (63) ,Right (74) ,Right (89) ,Right (94) ,Down (95) ,Right (97) ,Down (116) ,Down (121) ,Left (129) ,Left (131) ,Left (151) ,Left (164) ,Left (182) ,Left (188) ,Left (202) ,Left (209) ,Left (214) ,Down (218) ,Down (222) ,Right (226) ,Right (244) ,Right (258) ,Right (274) ,Right (275) ,Down (294) ,Right (312) ,Right (312) ,Right (327) ,Right (336) ,Down (349) ,Down (364) ,Down (369) 
+Developed Nodes:341
+
+40X40 MATRIX
+Right (24) ,Right (40) ,Right (44) ,Right (61) ,Right (63) ,Right (74) ,Right (89) ,Right (94) ,Down (95) ,Right (97) ,Down (116) ,Down (121) ,Left (129) ,Left (131) ,Left (151) ,Left (164) ,Left (182) ,Left (188) ,Left (202) ,Left (209) ,Left (214) ,Down (218) ,Down (222) ,Right (226) ,Right (244) ,Right (258) ,Right (274) ,Right (275) ,Down (294) ,Right (312) ,Right (312) ,Right (327) ,Right (336) ,Down (349) ,Down (364) ,Down (369) 
+Developed Nodes:501
+
+45X45 MATRIX
+Right (24) ,Right (40) ,Right (44) ,Right (61) ,Right (63) ,Right (74) ,Right (89) ,Right (94) ,Down (95) ,Right (97) ,Down (116) ,Down (121) ,Left (129) ,Left (131) ,Left (151) ,Left (164) ,Left (182) ,Left (188) ,Left (202) ,Left (209) ,Left (214) ,Down (218) ,Down (222) ,Right (226) ,Right (244) ,Right (258) ,Right (274) ,Right (275) ,Down (294) ,Right (312) ,Right (312) ,Right (327) ,Right (336) ,Down (349) ,Down (364) ,Down (369) 
+Developed Nodes:719
+
+47X47 MATRIX
+Right (24) ,Right (40) ,Right (44) ,Right (61) ,Right (63) ,Right (74) ,Right (89) ,Right (94) ,Down (95) ,Right (97) ,Down (116) ,Down (121) ,Left (129) ,Left (131) ,Left (151) ,Left (164) ,Left (182) ,Left (188) ,Left (202) ,Left (209) ,Left (214) ,Down (218) ,Down (222) ,Right (226) ,Right (244) ,Right (258) ,Right (274) ,Right (275) ,Down (294) ,Right (312) ,Right (312) ,Right (327) ,Right (336) ,Down (349) ,Down (364) ,Down (369) 
+Developed Nodes:824
+
+50X50 MATRIX
+Right (24) ,Right (40) ,Right (44) ,Right (61) ,Right (63) ,Right (74) ,Right (89) ,Right (94) ,Down (95) ,Right (97) ,Down (116) ,Down (121) ,Left (129) ,Left (131) ,Left (151) ,Left (164) ,Left (182) ,Left (188) ,Left (202) ,Left (209) ,Left (214) ,Down (218) ,Down (222) ,Right (226) ,Right (244) ,Right (258) ,Right (274) ,Right (275) ,Down (294) ,Right (312) ,Right (312) ,Right (327) ,Right (336) ,Down (349) ,Down (364) ,Down (369) 
+Developed Nodes:622
+

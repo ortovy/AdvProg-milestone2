@@ -18,7 +18,8 @@ for exemple: finding paths in matrix's, and reversing a string.
 each client handler will also have a server type
 **********************
 -serial server-
-a serial server will be handled one client at a time,
+a serial server will be handled one client at a time.
+**********************
 -parallel server-
 parallel server can handle multiple clients at a time via multithreading.
 each time we open a client handler we will inject it a server type.

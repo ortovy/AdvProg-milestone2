@@ -8,6 +8,22 @@ we created the problem and solution objects generic so we can use them in all ki
 we have a lot of ways defining a graph and a lot of algorithms to search with, because of the generic behaviour of the project we
 will be able to expand our project easily to every need we want.
 
+
+**********************
+#clientHandler interface
+this interface will help us manage all the different types of clients we will encounter
+in the project. this interface will help us maintain single responsibility and open/close.
+the client handler will recieve a protocol and work with it.
+for exemple: finding paths in matrix's, and reversing a string.
+each client handler will also have a server type
+**********************
+-serial server-
+a serial server will be handled one client at a time,
+-parallel server-
+parallel server can handle multiple clients at a time via multithreading.
+each time we open a client handler we will inject it a server type.
+for exemple: if we will want the client handler to work with one client at a time we will inject 
+serial server,
 **********************
 #searchable interface
 searchable interface will help us generalize graphes.
@@ -29,3 +45,10 @@ this PQ can compare states and push the "smallest state" to the top of the queue
 --chacheManager
 in order to not spend extra time on solving a solution we created a cahce manager that saves every solution of a problem in a hashmap
 so if we have a problem we already solved we can now return the solution in o(1) time.
+
+
+----our empirical experiment----
+in this project we use a parallel client server in order to conduct an experiment.
+our goal is to find the most efficient accurate path finding algorithm.
+we try each algorithm over 10 matrix's to find what searching algorithm is the best.
+the results of the experemint are added in a seperate pdf file.

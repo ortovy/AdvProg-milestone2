@@ -3,6 +3,7 @@
 //
 
 #include "FileCacheManager.h"
+// this class implements cache manager, it uses files as data. each solution is saved to a file.
 bool FileCacheManager:: existsSolution(string problem){
     string fileName = to_string(hasher(problem));
     ifstream fromFile;
@@ -18,7 +19,6 @@ string FileCacheManager:: getSolution(string problem){
     string solution;
     ifstream fromFile;
     string fileName = to_string(hasher(problem));
-    //fromFile.open(fileName, ios::in|ios::binary);
     fromFile.open(fileName);
     if (!fromFile) {
         cout<<"failed to open file"<<endl;

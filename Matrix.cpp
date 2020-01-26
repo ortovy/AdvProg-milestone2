@@ -3,26 +3,31 @@
 //
 
 #include "Matrix.h"
-Matrix::Matrix(int rows, int columns, vector<vector<double>> matrix, State<Cell> *initial, State<Cell> *goal) {
-    this->rows = rows;
-    this->columns = columns;
-    this->matrix = matrix;
+//this class implement Searchable interface and defines a matrix
+Matrix::Matrix(int rowsNum, int columnsNum, vector<vector<double>> matrix1, State<Cell> *initial, State<Cell> *goal) {
+    this->rows = rowsNum;
+    this->columns = columnsNum;
+    this->matrix = matrix1;
     this->initialState = initial;
     this->goalState = goal;
     this->initialState->setStateInitialCost(matrix[initialState->getStateObj().getRow()][initialState->getStateObj().getColumn()]);
     this->initialState->setStateCost(matrix[initialState->getStateObj().getRow()][initialState->getStateObj().getColumn()]);
 
 }
-
+//returns the starting position
 State<Cell>* Matrix:: getInitialState() {
     return this->initialState;
 }
+//checks if certain state is the goal state.
 bool Matrix:: isGoalState(State<Cell> *state) {
     return (goalState->operator==(state));
 }
+//return the goal state
 State<Cell>* Matrix::getGoalState() {
     return goalState;
 }
+//this function returns every possible adj states a given state has,
+//the states come in a vector of states.
 vector<State<Cell>*> Matrix:: getAllPossibleStates(State<Cell> *state) {
     vector<State<Cell>*> adjList;
     //gets i,j - location on the matrix
@@ -53,14 +58,16 @@ vector<State<Cell>*> Matrix:: getAllPossibleStates(State<Cell> *state) {
     }
     return adjList;
 }
+//this function returns a given state value
 double Matrix::getStateValue(State<Cell> *state) {
     return matrix[state->getStateObj().getRow()][state->getStateObj().getColumn()];
 }
-
+//this function sets a new value to a state.
 void Matrix::setStateValue(State<Cell> *state, double val) {
     matrix[state->getStateObj().getRow()][state->getStateObj().getColumn()] = val;
     state->setStateCost(val);
 }
+//this function creates string describing this matrix
 string Matrix::toString() {
     string matrixStr;
     matrixStr.append("#" + to_string(initialState->getStateObj().getRow()) + ","+ to_string(initialState->getStateObj().getColumn()));

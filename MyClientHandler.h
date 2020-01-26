@@ -16,6 +16,7 @@
 #include "vector"
 #include "Solver.h"
 using namespace std;
+//this class implement ClientHandler interface and defines how to handle client requests
 class MyClientHandler: public ClientHandler{
     CacheManager<string> *cache;
     Solver<Searchable<Cell>*, vector<State<Cell>*>> *solver;

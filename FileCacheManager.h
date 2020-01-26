@@ -12,6 +12,7 @@
 #include <unordered_map>
 #include <iostream>
 using namespace std;
+// this class implements cache manager, it uses files as data. each solution is saved to a file.
 class FileCacheManager: public CacheManager<string>{
 private:
     hash<string> hasher;
@@ -19,7 +20,6 @@ public:
     bool existsSolution(string problem);
     string getSolution(string problem);
     void saveSolution(string problem, string solution);
-    void toFile(string solution, string fileName);
 };
 
 

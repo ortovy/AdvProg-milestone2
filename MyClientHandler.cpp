@@ -8,16 +8,19 @@
 #include "Cell.h"
 #include "State.h"
 #include <string>
-MyClientHandler::MyClientHandler(CacheManager<string> *cache, Solver<Searchable<Cell>*, vector<State<Cell>*>> *s) {
-    this->cache = cache;
+//constructor
+MyClientHandler::MyClientHandler(CacheManager<string> *cache1, Solver<Searchable<Cell>*, vector<State<Cell>*>> *s) {
+    this->cache = cache1;
     this->solver = s;
 }
+//returns copy
 ClientHandler * MyClientHandler::clone() {
     auto solverClone = this->solver->clone();
     MyClientHandler *clone = new MyClientHandler(cache, solverClone);
     return clone;
 }
-    void MyClientHandler::handleClient(int clientSocket) {
+//defines how to handle client requests
+void MyClientHandler::handleClient(int clientSocket) {
     char buffer[1024] = {0};
     vector<string> linesFromClient;
     string temp1;
@@ -28,7 +31,7 @@ ClientHandler * MyClientHandler::clone() {
         valread = read(clientSocket, buffer, 1024);
     }
     string temp2;
-    for (int i =0; i<temp1.size();i++) {
+    for (unsigned int i =0; i<temp1.size();i++) {
         if (temp1[i] == '\n') {
             linesFromClient.push_back(temp2);
             temp2="";
@@ -39,16 +42,16 @@ ClientHandler * MyClientHandler::clone() {
     //create the exit state
     string temp = linesFromClient.back();
     linesFromClient.pop_back();
-    double i = splitByComma(temp)[0];
-    double j = splitByComma(temp)[1];
-    State<Cell>* goal = new State<Cell> (Cell(i,j));
+    double i1 = splitByComma(temp)[0];
+    double j1 = splitByComma(temp)[1];
+    State<Cell>* goal = new State<Cell> (Cell(i1,j1));
 
-    //create the exit state
+    //create the initial state
     temp = linesFromClient.back();
     linesFromClient.pop_back();
-    i = splitByComma(temp)[0];
-    j = splitByComma(temp)[1];
-    State<Cell>* init = new State<Cell> (Cell(i, j));
+    i1 = splitByComma(temp)[0];
+    j1 = splitByComma(temp)[1];
+    State<Cell>* init = new State<Cell> (Cell(i1, j1));
 
     // create the  matrix
     vector<vector<double>> matrix;
@@ -73,10 +76,10 @@ ClientHandler * MyClientHandler::clone() {
     }
     close(clientSocket);
 }
-
+//returns a vector of comma-separated strings
 vector<double> MyClientHandler:: splitByComma(string line) {
     string delimiter = ",";
-    int pos = 0;
+    unsigned int pos = 0;
     vector<double> values;
     string token;
     while ((pos = line.find(delimiter)) != std::string::npos) {
@@ -89,12 +92,13 @@ vector<double> MyClientHandler:: splitByComma(string line) {
     }
     return values;
 }
+//gets vector of states(the solution) and returns a string of instructions (up, down ...)
 string MyClientHandler::solutionToString(vector<State<Cell>*> solution) {
     string solutionStr;
     int i1 = solution[0]->getStateObj().getRow();
     int j1 = solution[0]->getStateObj().getColumn();
     int tempCost =(int) solution[0]->getStateInitialCost();
-    for (int k = 1; k < solution.size(); k++) {
+    for (unsigned int k = 1; k < solution.size(); k++) {
         int i2 = solution[k]->getStateObj().getRow();
         int j2 = solution[k]->getStateObj().getColumn();
         if (i1 < i2) {

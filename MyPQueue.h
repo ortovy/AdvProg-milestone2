@@ -9,15 +9,20 @@
 #include <queue>
 using namespace std;
 template <typename T>
+//this class creates a state priority queue
+//this data struct helps us in certain algorithms.
 class MyPQueue {
     priority_queue<State<T>*> priorityQueue;
 public:
+    //push to queue.
     void pushPQ(State<T>* s) {
         priorityQueue.push(s);
     }
+    //checks if queue is clear.
     bool isEmpty() {
         return(priorityQueue.empty());
     }
+    //checks if state is in queue.
     bool existInPQueue(State<T>* s1) {
         priority_queue<State<T>*> helper = priorityQueue;
         while (!helper.empty()) {
@@ -29,6 +34,7 @@ public:
         }
         return false;
     }
+    //return a the the given state that in the priority queue
     State<T>* valInPQueue(State<T> *s) {
         priority_queue<State<T>*> helper = priorityQueue;
         while (!helper.empty()) {
@@ -39,6 +45,7 @@ public:
             }
         }
     }
+    //returns top of the priority queue.
     State<T>* topPQ(){
         priority_queue<State<T>*> helper = priorityQueue;
         double minCost = helper.top()->getStateCost();
@@ -54,6 +61,7 @@ public:
         }
         return minState;
     }
+    //pops state from the priority queue
     void popPQ(State<T>* s){
         priority_queue<State<T>*> helper = priorityQueue;
         priority_queue<State<T>*> helper2;
@@ -67,6 +75,7 @@ public:
         priorityQueue = helper2;
 
     }
+    //deletes the given state from the priority queue
     void deletePQ(State<T>* s) {
         priority_queue<State<T>*> helper = priorityQueue;
         while (!helper.empty()) {

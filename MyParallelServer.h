@@ -14,6 +14,7 @@
 #include <string.h>
 #include <vector>
 using namespace std;
+//this class implement ServerI interface and defines parallel server
 class MyParallelServer: public ServerI{
 private:
     bool stopp= false;

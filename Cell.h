@@ -5,10 +5,11 @@
 #ifndef ADVPROG_MILESTONE2_CELL_H
 #define ADVPROG_MILESTONE2_CELL_H
 
-
+//cell class helps us handle states,
+//each cell contains the x,y axis values in a matrix.
 class Cell {
-    int i;
-    int j;
+    int row;
+    int column;
 public:
     Cell(int i, int j);
     int getRow();

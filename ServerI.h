@@ -7,10 +7,13 @@
 
 #include "ClientHandler.h"
 #include <thread>
+//serverl interface
 class ServerI {
 public:
     virtual void open(int port, ClientHandler *c) = 0;
     virtual void stop() = 0;
+    virtual ~ServerI() {
+    }
 };
 
 

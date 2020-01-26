@@ -1,8 +1,9 @@
 //
 // Created by omer on 12/01/2020.
 //
-
+//this class implement Server interface and defines serial server
 #include "MySerialServer.h"
+//this method open server socket that listens to clients and handles them in serial
 void MySerialServer::open(int port, ClientHandler *c) {
     socketfd = socket(AF_INET, SOCK_STREAM, 0);
     if (socketfd == -1) {
@@ -33,18 +34,20 @@ void MySerialServer::open(int port, ClientHandler *c) {
     thread thread1([=] {acceptClients(socketfd, address, c); });
     thread1.join();
 }
+//close the server socket
 void MySerialServer::stop() {
     close(socketfd);
 }
-void MySerialServer:: acceptClients(int socketfd, sockaddr_in address, ClientHandler *c) {
+//this method accept clients and send them to clientHandler to handle their requests
+void MySerialServer:: acceptClients(int socketFd, sockaddr_in address, ClientHandler *c) {
     struct timeval tv;
     tv.tv_sec = 60;
-    setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
-    int client_socket = accept(socketfd, (struct sockaddr *)&address, (socklen_t*)&address);
+    setsockopt(socketFd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
+    int client_socket = accept(socketFd, (struct sockaddr *)&address, (socklen_t*)&address);
     while (client_socket != -1) {
         cout<<"client in connected"<<endl;
         c->handleClient(client_socket);
-        client_socket = accept(socketfd, (struct sockaddr *)&address, (socklen_t*)&address);
+        client_socket = accept(socketFd, (struct sockaddr *)&address, (socklen_t*)&address);
     }
     stop();
 }

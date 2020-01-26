@@ -10,6 +10,7 @@
 #include "Cell.h"
 #include <vector>
 #include <string>
+//this class implement Searchable interface and defines a matrix
 class Matrix: public Searchable<Cell> {
     int rows;
     int columns;

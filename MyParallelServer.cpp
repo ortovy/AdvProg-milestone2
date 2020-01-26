@@ -2,8 +2,9 @@
 // Created by omer on 23/01/2020.
 //
 
+//this class implement ServerI interface and defines parallel server
 #include "MyParallelServer.h"
-
+//this method opens server that listens to clients and handles them in parallel
 void MyParallelServer::open(int port, ClientHandler *c) {
     socketfd = socket(AF_INET, SOCK_STREAM, 0);
     if (socketfd == -1) {
@@ -34,16 +35,18 @@ void MyParallelServer::open(int port, ClientHandler *c) {
     std::thread thread1(&MyParallelServer::acceptClients, MyParallelServer(), socketfd, address, c);
     thread1.join();
 }
+//stop the server work
 void MyParallelServer::stop() {
     this->stopp = true;
 }
-void MyParallelServer:: acceptClients(int socketfd, sockaddr_in address, ClientHandler *c) {
+//this method accept clients and send them to clientHandler to handle their requests
+void MyParallelServer:: acceptClients(int socketFd, sockaddr_in address, ClientHandler *c) {
     vector<thread> threadVec;
     struct timeval tv;
     tv.tv_sec = 60;
-    setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
+    setsockopt(socketFd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
     while (!stopp) {
-        int client_socket = accept(socketfd, (struct sockaddr *) &address, (socklen_t *) &address);
+        int client_socket = accept(socketFd, (struct sockaddr *) &address, (socklen_t *) &address);
         if (client_socket == -1) {
             if (errno == EWOULDBLOCK) {
                 this->stop();
@@ -60,4 +63,5 @@ void MyParallelServer:: acceptClients(int socketfd, sockaddr_in address, ClientH
         std::thread clientThread(&ClientHandler::handleClient, newC, client_socket);
         clientThread.detach();
     }
+    close(socketfd);
 }

@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <string.h>
 using namespace std;
+//this class implement Server interface and defines serial server
 class MySerialServer: public ServerI{
 private:
     int socketfd;

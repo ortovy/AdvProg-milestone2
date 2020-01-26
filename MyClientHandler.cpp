@@ -79,7 +79,7 @@ void MyClientHandler::handleClient(int clientSocket) {
 //returns a vector of comma-separated strings
 vector<double> MyClientHandler:: splitByComma(string line) {
     string delimiter = ",";
-    unsigned int pos = 0;
+    int pos = 0;
     vector<double> values;
     string token;
     while ((pos = line.find(delimiter)) != std::string::npos) {

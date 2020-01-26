@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
         ClientHandler *c = new MyClientHandler(cache, s);
         MyParallelServer server = MyParallelServer();
         server.open(port, c);
+
     }
     return 0;
 }
